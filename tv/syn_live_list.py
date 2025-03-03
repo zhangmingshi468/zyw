@@ -9,11 +9,10 @@ def print_current_time(message):
     current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     print(f"{message} {current_time}")
 
-# 从环境变量获取 GitHub 令牌
-GITHUB_TOKEN = os.getenv('MY_GITHUB_TOKEN')
-
-if not GITHUB_TOKEN:
-    raise ValueError("GITHUB_TOKEN is not set")
+# 移除 GitHub 令牌相关代码
+# GITHUB_TOKEN = os.getenv('MY_GITHUB_TOKEN')
+# if not GITHUB_TOKEN:
+#     raise ValueError("GITHUB_TOKEN is not set")
 
 # 需要下载并处理的文件URL
 urls_to_process = [
@@ -49,10 +48,12 @@ merged_content = []
 # 下载并处理每个文件
 def download_and_process_files(urls, process_content):
     for url in urls:
-        headers = {
-            'Authorization': f'token {GITHUB_TOKEN}'
-        }
-        response = requests.get(url, headers=headers)
+        # 移除 headers 参数
+        # headers = {
+        #     'Authorization': f'token {GITHUB_TOKEN}'
+        # }
+        # response = requests.get(url, headers=headers)
+        response = requests.get(url)
         if response.status_code == 200:
             content = response.text
             # 保存下载的文件到当前目录
